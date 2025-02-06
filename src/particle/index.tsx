@@ -2,8 +2,15 @@ import { AuthCoreContextProvider } from '@particle-network/auth-core-modal';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react';
 import { type ReactNode } from 'react';
 
-// 1. Get projectId at https://cloud.walletconnect.com
-const projectId = process.env.REACT_APP_WALLETCONNECT_PROJECT_ID;
+const APP_ID=`${__VITE_APP_ID__}`;
+const PROJECT_ID=`${__VITE_PROJECT_ID__}`;
+const CLIENT_KEY=`${__VITE_CLIENT_KEY__}`;
+const WALLETCONNECT_PROJECT_ID=`${__VITE_WALLETCONNECT_PROJECT_ID__}`;
+
+console.log("WALLETCONNECT_PROJECT_ID", WALLETCONNECT_PROJECT_ID);
+console.log("APP_ID", APP_ID);
+console.log("CLIENT_KEY", CLIENT_KEY);
+console.log("PROJECT_ID", PROJECT_ID);
 
 // 2. Set chains
 const mainnet = {
@@ -33,19 +40,20 @@ const metadata = {
 const web3Modal = createWeb3Modal({
     ethersConfig: defaultConfig({ metadata }),
     chains: [mainnet, goerli],
-    projectId,
+    projectId: WALLETCONNECT_PROJECT_ID,
     enableAnalytics: true,
 });
 
+const particleConfig = {
+	projectId: PROJECT_ID,
+	clientKey: CLIENT_KEY,
+	appId: APP_ID,
+    web3Modal
+}
+
 const ParticleProvider = ({ children }: { children: ReactNode }) => {
     return (
-        <AuthCoreContextProvider
-            options={{
-                projectId: process.env.REACT_APP_PROJECT_ID,
-                clientKey: process.env.REACT_APP_CLIENT_KEY,
-                appId: process.env.REACT_APP_APP_ID,
-                web3Modal,
-            }}
+        <AuthCoreContextProvider options={particleConfig}
         >
             {children}
         </AuthCoreContextProvider>
