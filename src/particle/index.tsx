@@ -2,10 +2,15 @@ import { AuthCoreContextProvider } from '@particle-network/auth-core-modal';
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react';
 import { type ReactNode } from 'react';
 
-const APP_ID=`${__VITE_APP_ID__}`;
-const PROJECT_ID=`${__VITE_PROJECT_ID__}`;
-const CLIENT_KEY=`${__VITE_CLIENT_KEY__}`;
-const WALLETCONNECT_PROJECT_ID=`${__VITE_WALLETCONNECT_PROJECT_ID__}`;
+const APP_ID = import.meta.env.VITE_APP_ID;
+const PROJECT_ID = import.meta.env.VITE_PROJECT_ID;
+const CLIENT_KEY = import.meta.env.VITE_CLIENT_KEY;
+const WALLETCONNECT_PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
+
+//const APP_ID=`${__VITE_APP_ID__}`;
+//const PROJECT_ID=`${__VITE_PROJECT_ID__}`;
+//const CLIENT_KEY=`${__VITE_CLIENT_KEY__}`;
+//const WALLETCONNECT_PROJECT_ID=`${__VITE_WALLETCONNECT_PROJECT_ID__}`;
 
 console.log("WALLETCONNECT_PROJECT_ID", WALLETCONNECT_PROJECT_ID);
 console.log("APP_ID", APP_ID);
